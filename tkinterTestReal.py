@@ -1,8 +1,11 @@
 from tkinter import * #simple way to import only what we need, low memory
+import random
 
 top = Tk()
 groceryList = []
-
+myRolls = []
+rollTimes = 0
+dieType = 0
 
 def results():
     result = E1.get()
@@ -25,17 +28,17 @@ def mainMenu():
     LMain = Label(top, text = "Block 5 GUI Projects")
     LMain.grid(column = 0, row = 0)
     B1Main = Button(text ="  Week 1  ", bg= "blue", command = week1)
-    B1Main.grid(colum = 0, row =1)
+    B1Main.grid(column = 0, row =1)
     B2Main = Button(text ="  Week 2  ", bg= "blue", command = week2)
-    B2Main.grid(colum =0, row =2)
+    B2Main.grid(column =0, row =2)
     B3Main = Button(text ="  Week 3  ", bg= "blue",)
-    B3Main.grid(colum =0, row =3)
+    B3Main.grid(column =0, row =3)
 
-""""
+"""
 export doesn't work and window doesn't show up.
-""""
+"""
 def week1():
-    
+    clearWindow()
     def addToList():
         newItem = E1.get()
         groceryList.append(newItem)
@@ -62,9 +65,31 @@ def week1():
     Bclear = Button( text = "Main Menu", bg = "blue", command = mainMenu)
     Bclear.grid(column = 3, row =3)
 
-    mainloop is an initialization statement, a way to start. But for tkinter, this statement has to be the last line
+    #mainloop is an initilization statement, a way to start. But for tkinter, this statement has to be the last line
 
 def week2():
+    def rollDice():
+        dieType = E1W2.get()
+        rollTimes = E2W2.get()
+        
+        #clear window AFTER pulling Entry data
+        clearWindow()
+        
+        #calculate dice rolls
+        for x in range(0, int(rollTimes)):
+            myRolls.append(random.randint(1, int(dieType)))
+            
+        #display dice rolls and present an exit button
+        L4W2 = Label(top, text = "Here are your rolls!")
+        L4W2.grid(column = 0, row = 1)
+
+        #modify this grid so the list prints in a good way
+        L5W2 =Label(top, text = "{}".format(myRolls))
+        L5W2.grid(column = 0, row = 2)
+        
+        B2W2 =Button(top, text = "Main Menu", bg = "blue", command = mainMenu)
+        B2W2.grid(column = 0, row = 3)
+    
     clearWindow()
     L1W2 = Label(top, text= "Dice Roller Program")
     L1W2.grid(column =3 , row =0 )
@@ -81,13 +106,13 @@ def week2():
     E2W2 = Entry(top,bd=5)
     E2W2.grid(column = 5, row =4 )
     
-    B1W2 = Button(top, text = "Roll dice!!", bg = 'green', command = rolldice)
-    B1W2.grid(column = , row = )
+    B1W2 = Button(top, text = "Roll dice!!", bg = 'green', command = rollDice)
+    B1W2.grid(column = 2, row = 5)
 
     #to add: roll function and exit button
 
 if __name__=="__main__":
-    mainMenue()
+    mainMenu()
     top.mainloop()
 
 
